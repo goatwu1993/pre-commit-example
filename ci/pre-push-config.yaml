@@ -8,3 +8,5 @@ repos:
         name: pytest
         language: system
         entry: pytest
+        pass_filenames: false
+
