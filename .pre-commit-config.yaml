@@ -1,0 +1,56 @@
+---
+exclude: "docs|node_modules|migrations|.tox"
+default_stages: [commit]
+fail_fast: false
+
+repos:
+  - repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: v3.3.0
+    hooks:
+      - id: end-of-file-fixer
+      - id: fix-encoding-pragma
+        args: ["--remove"]
+      - id: check-case-conflict
+      - id: check-docstring-first
+      - id: check-merge-conflict
+        exclude: /README\.rst$|^docs/.*\.rst$
+      - id: check-symlinks
+      - id: check-xml
+      - id: mixed-line-ending
+        args: ["--fix=lf"]
+      - id: detect-private-key
+
+  - repo: https://github.com/psf/black
+    rev: 20.8b1
+    hooks:
+      - id: black
+
+  - repo: https://github.com/pycqa/isort
+    rev: 5.6.4
+    hooks:
+      - id: isort
+        args: ["--profile", "black"]
+
+  - repo: https://gitlab.com/pycqa/flake8
+    rev: 3.8.4
+    hooks:
+      - id: flake8
+        args: ["--config=./ci/setup.cfg"]
+        additional_dependencies: ["flake8-isort", "flake8-bugbear==20.1.4"]
+
+  - repo: https://github.com/alessandrojcm/commitlint-pre-commit-hook
+    rev: v2.2.0
+    hooks:
+      - id: commitlint
+        stages: [commit-msg]
+        args: ["--config=ci/commitlint.yaml"]
+        additional_dependencies: ["conventional-changelog-conventionalcommits"]
+
+  - repo: local
+    hooks:
+      - id: pytest
+        name: pytest
+        stages: [push]
+        language: system
+        entry: pytest
+        pass_filenames: false
