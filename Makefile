@@ -5,11 +5,11 @@ GIT_COMMIT_TIME = $(shell git log -n 1 --pretty=format:"%ad" --date=iso)
 PIP = $(shell which pip)
 
 .PHONY: help
-help: ## Show help message
+help: ## Show help messages
 	@grep -E '^[a-zA-Z_-]+:.*?## .*$$' $(MAKEFILE_LIST) | sort | awk 'BEGIN {FS = ":.*?## "}; {printf "\033[36m%-30s\033[0m %s\n", $$1, $$2}'
 
 .PHONY: install-all-hooks
-install-all-hooks: install-hooks-packages install-cm-template install-cm-hook install-pc-hook install-pp-hook## Install all hooks
+install-all-hooks: install-hooks-packages install-cm-template install-cm-hook install-pc-hook install-pp-hook ## Install all hooks
 
 .PHONY: install-hooks-packages
 install-hooks-packages: ## Install packages for git hooks
