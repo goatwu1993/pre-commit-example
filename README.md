@@ -9,7 +9,7 @@ Pre-commit may refer to
 
 ## What is git hook
 
-Git hooks is a git's build-in synergy. Whenever a particular git event occurs, a script may be called.
+Git hooks is a git's built-in synergy. Whenever a particular git event occurs, a script may be called.
 
 ## Example 1
 
