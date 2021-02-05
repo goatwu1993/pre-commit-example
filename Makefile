@@ -17,7 +17,7 @@ install-hooks-packages: ## Install packages for git hooks
 	@$(PIP) install -q pre-commit
 
 .PHONY: install-pc-hook
-install-pc-hook: ci/pre-commit-config.yaml ## Install pre-commit hook
+install-pc-hook: .pre-commit-config.yaml ## Install pre-commit hook
 	# Install pre-commit hook
 	@pre-commit install -c $<
 
@@ -27,14 +27,15 @@ install-cm-template: ci/COMMIT_MESSAGE_TEMPLATE ## Install commit-message templa
 	@$(GIT) config commit.template $<
 
 .PHONY: install-cm-hook
-install-cm-hook: ci/commit-message-config.yaml ## Install commit-message hook
+install-cm-hook: .pre-commit-config.yaml ## Install commit-message hook
 	# Install commit-message hook
 	@pre-commit install -c $< --hook-type commit-msg
 
 .PHONY: install-pp-hook
-install-pp-hook: ci/pre-push-config.yaml ## Install pre-push hook
+install-pp-hook: .pre-commit-config.yaml ## Install pre-push hook
+	# Install pytest
+	@$(PIP) install -q pytest
 	# Install pre-push hook
-	@$(PIP) install pytest
 	@pre-commit install -c $< --hook-type pre-push
 
 .PHONY: uninstall-all-hooks
