@@ -1,5 +1,5 @@
 ---
-exclude: "docs|node_modules|migrations|.git|.tox"
+exclude: "docs|node_modules|migrations|.tox"
 default_stages: [commit]
 fail_fast: false
 
@@ -51,7 +51,7 @@ repos:
     hooks:
       - id: commitlint
         stages: [commit-msg]
-        args: ["--config=ci/.commitlint.yaml"]
+        args: ["--config=ci/commitlint.yaml"]
         additional_dependencies: ["conventional-changelog-conventionalcommits"]
 
   - repo: local
