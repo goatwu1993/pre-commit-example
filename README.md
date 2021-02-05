@@ -1,13 +1,13 @@
 # pre-commit-example
 
-## What is pre-commit
+## What is pre-commit?
 
 Pre-commit may refer to
 
 1. Pre-commit: one stage among git hooks
 2. Pre-commit: git hooks framework written in Python
 
-## What is git hook
+## What is git hook?
 
 Git hooks is a git's built-in synergy. Whenever a particular git event occurs, a script may be called.
 
@@ -40,19 +40,19 @@ return 1' > .git/hooks/pre-commit
 chmod 755 .git/hooks/pre-commit
 ```
 
-Because the script always return 1, pre-commit always failed, and thus you can not commit anymore.
+Because the script always return 1, pre-commit always failed, and thus you cannot commit anymore.
 
-## What can git hook do
+## What can git hook do?
 
 If we install some scripts to check/format the code, and return zero only if all check passed, we can make sure the remote code is always clean and formatted.
 
-## What is pre-commit (framework)
+## What is pre-commit framework?
 
-As shown above, git hooks can be installed manually. However, not every one like to write script.
+As shown above, git hooks can be installed manually. However, scripts can be hard to develop and maintain.
 
-Fortunately, there is framework for it.
+Fortunately, there are serveral frameworks that allows you to install/manage git hooks.
 
-[Pre-commit](https://pre-commit.com/) is a git-hook framework written in Python. It allow you to define your git hooks in yaml.
+[Pre-commit](https://pre-commit.com/) is one of those frameworks. It is written in `Python` and git hooks are defined in `Yaml`.
 
 ## How to install
 
@@ -62,7 +62,7 @@ pip install pre-commit
 pre-commit install
 ```
 
-## Why use pre-commit (framework)
+## Why use pre-commit?
 
 Pre-commit is python-friendly because:
 
