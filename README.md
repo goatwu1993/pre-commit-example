@@ -64,9 +64,9 @@ pre-commit install
 
 ## Why use pre-commit (framework)
 
-Pre-commit is python-friendly because
+Pre-commit is python-friendly because:
 
-1. pre-commit is pip installable
-2. there are serveral python lint/check hooks provided by community. e.g. `autopep8`, `flake8`, `isort` and `black/yapf`.
+1. It is pip installable
+2. It has serveral python lint/check hooks provided by community. e.g. `autopep8`, `flake8`, `isort` and `black/yapf`.
 
 There is also other frameworks. For instance, [Husky](https://github.com/typicode/husky) is a well-known git hook framework in Javascript eco-system.
