@@ -9,12 +9,16 @@ help: ## Show help messages
 	@grep -E '^[a-zA-Z_-]+:.*?## .*$$' $(MAKEFILE_LIST) | sort | awk 'BEGIN {FS = ":.*?## "}; {printf "\033[36m%-40s\033[0m %s\n", $$1, $$2}'
 
 .PHONY: install-dev
-install-dev: install-commit-message-template install-hooks ## Install dev tools
+install-dev: install-commit-message-template install-dev-pkgs install-hooks ## Install dev tools
+
+.PHONY: install-dev-pkgs
+install-dev-pkgs: ## Install dev packages
+	# Install dev packages
+	@$(PIP) install -q pre-commit commitizen
 
 .PHONY: install-hooks
-install-hooks: .pre-commit-config.yaml ## Install packages for git hooks
-	# Install pre-commit
-	@$(PIP) install -q pre-commit
+install-hooks: .pre-commit-config.yaml install-dev-pkgs ## Install packages for git hooks
+	# Install git hooks
 	@pre-commit install -c $< -t pre-commit -t commit-msg -t pre-push
 
 .PHONY: install-commit-message-template
