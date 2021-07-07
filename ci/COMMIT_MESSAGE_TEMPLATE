@@ -4,20 +4,18 @@
 # │       │               summary in present tense. not capitalized. no period at the end
 # │       │
 # │       └─⫸ Commit Scope (Optional)
-# │            django|stream|iothub|model ...
+# │            api/css/database
 # │
 # └─⫸ Commit Type (Required)
 #     build|ci|docs|feat|fix|perf|refactor|revert|style|test|chore|revert
+#
 #
 # Conventional Commits
 #   https://www.conventionalcommits.org/en/v1.0.0/#summary
 #   https://www.conventionalcommits.org/en/v1.0.0/#specification
 # Ignore body and footer since we are using squash and merge.
 #
-# Conventional Commits recommends the Angular convention commit types
-#   https://www.conventionalcommits.org/en/v1.0.0/#summary
-#   https://github.com/angular/angular/blob/master/CONTRIBUTING.md#type
-#
+# Available types
 #   fix: bug fix for the user
 #   feat: new feature for the user
 #   build: changes that affect the build system or external dependencies
