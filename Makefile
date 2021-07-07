@@ -14,7 +14,7 @@ install-dev: install-commit-message-template install-dev-pkgs install-hooks ## I
 .PHONY: install-dev-pkgs
 install-dev-pkgs: ## Install dev packages
 	# Install dev packages
-	@$(PIP) install -q pre-commit commitizen
+	@$(PIP) install -q pre-commit commitizen pytest
 
 .PHONY: install-hooks
 install-hooks: .pre-commit-config.yaml install-dev-pkgs ## Install packages for git hooks
