@@ -6,47 +6,36 @@ PIP = $(shell which pip)
 
 .PHONY: help
 help: ## Show help messages
-	@grep -E '^[a-zA-Z_-]+:.*?## .*$$' $(MAKEFILE_LIST) | sort | awk 'BEGIN {FS = ":.*?## "}; {printf "\033[36m%-30s\033[0m %s\n", $$1, $$2}'
+	@grep -E '^[a-zA-Z_-]+:.*?## .*$$' $(MAKEFILE_LIST) | sort | awk 'BEGIN {FS = ":.*?## "}; {printf "\033[36m%-40s\033[0m %s\n", $$1, $$2}'
 
-.PHONY: install-all-hooks
-install-all-hooks: install-hooks-packages install-cm-template install-cm-hook install-pc-hook install-pp-hook ## Install all hooks
+.PHONY: install-dev
+install-dev: install-commit-message-template install-hooks ## Install dev tools
 
-.PHONY: install-hooks-packages
-install-hooks-packages: ## Install packages for git hooks
+.PHONY: install-hooks
+install-hooks: .pre-commit-config.yaml ## Install packages for git hooks
 	# Install pre-commit
 	@$(PIP) install -q pre-commit
+	@pre-commit install -c $< -t pre-commit -t commit-msg -t pre-push
 
-.PHONY: install-pc-hook
-install-pc-hook: .pre-commit-config.yaml ## Install pre-commit hook
-	# Install pre-commit hook
-	@pre-commit install -c $<
-
-.PHONY: install-cm-template
-install-cm-template: ci/COMMIT_MESSAGE_TEMPLATE ## Install commit-message template
+.PHONY: install-commit-message-template
+install-commit-message-template: ci/COMMIT_MESSAGE_TEMPLATE ## Install commit-message template
 	# Install commit-message template
 	@$(GIT) config commit.template $<
 
-.PHONY: install-cm-hook
-install-cm-hook: .pre-commit-config.yaml ## Install commit-message hook
-	# Install commit-message hook
-	@pre-commit install -c $< --hook-type commit-msg
-
-.PHONY: install-pp-hook
-install-pp-hook: .pre-commit-config.yaml ## Install pre-push hook
-	# Install pytest
-	@$(PIP) install -q pytest
-	# Install pre-push hook
-	@pre-commit install -c $< --hook-type pre-push
-
-.PHONY: uninstall-all-hooks
-uninstall-all-hooks: ## Remove all hooks
+.PHONY: uninstall-hooks
+uninstall-hooks: ## Uninstall hooks
 	# Remove all hooks
-	@pre-commit uninstall
-	@pre-commit uninstall --hook-type commit-msg
-	@pre-commit uninstall --hook-type pre-push
+	@pre-commit uninstall -t pre-commit -t commit-msg -t pre-push
+
+.PHONY: uninstall-commit-message-template
+uninstall-commit-message-template: ## Uninstall commit-message template
 	# Remove commit template
 	@$(GIT) config --unset commit.template || true
 
-.PHONY: reinstall-all-hooks
-reinstall-all-hooks: uninstall-all-hooks install-all-hooks ## Reinstall all hooks
+.PHONY: uninstall-dev
+uninstall-dev: uninstall-hooks uninstall-commit-message-template ## Uninstall dev tools
+	# Uninstall all hooks
+
+.PHONY: reinstall-dev
+reinstall-dev: uninstall-dev install-dev ## Reinstall dev tools
 	# Reinstall all hooks
