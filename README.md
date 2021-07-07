@@ -1,4 +1,4 @@
-# pre-commit-example
+# pre-commit example
 
 ## What is pre-commit?
 
@@ -57,8 +57,12 @@ Fortunately, there are serveral frameworks that allows you to install/manage git
 ## How to install
 
 ```bash
+# install packages
 pip install pre-commit
+# this repo run pytest at pre-push stage
+pip install pytest
 
+# Install hooks
 pre-commit install
 ```
 
