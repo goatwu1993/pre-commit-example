@@ -1,3 +1,19 @@
+## v2.0.0 (2021-07-14)
+
+### Feat
+
+- add feature #JRA-004
+- add feature #JRA-003
+
+### BREAKING CHANGE
+
+- this is breaking change description
+
+### Fix
+
+- fix bug #BUG-106
+- fix bug #BUG-105
+
 ## v1.1.0 (2021-07-13)
 
 ### Fix
