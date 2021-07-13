@@ -1,2 +1,2 @@
 def get_value():
-    return 3
+    return 4
